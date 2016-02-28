@@ -1,5 +1,5 @@
 {
-  "name": "Escher",
+  "name": "Ember Time Machine",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -61,7 +61,7 @@
     "winston": "^2.1.1"
   },
   "engines": {
-    "node": "^5.5",
+    "node": "^4.3",
     "npm": "^3"
   },
   "devDependencies": {

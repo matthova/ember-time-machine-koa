@@ -1,6 +1,7 @@
-# Koa Bark
+# Ember Time Machine
 
-An es7 friendly framework for NodeJS applications.  
+An es7 friendly, socket driven, NodeJS / Koa server with a persistent database.  
+Used to drive a raspberry pi's GPIO pins to take photos
 
 The framework is built on top of
 - Koa 2
