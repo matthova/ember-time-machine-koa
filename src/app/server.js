@@ -1,10 +1,10 @@
-require(`source-map-support`).install();
+require('source-map-support').install();
 require('dotenv').config();
-require(`babel-polyfill`);
-const http = require(`http`);
+require('babel-polyfill');
+const http = require('http');
 
-const config = require(`./config`);
-const KoaApp = require(`./koaApp`);
+const config = require('./config');
+const KoaApp = require('./koaApp');
 
 // Create a new app object and set it up
 const koaApp = new KoaApp(config);
@@ -16,15 +16,15 @@ const server = http.createServer(app.callback());
  * Listen on provided port, on all network interfaces.
  * Port is set per command line, or the config, and falls back on port 9000
  */
-const port = normalizePort(process.env.PORT || config.port || `9000`);
+const port = normalizePort(process.env.PORT || config.port || '9000');
 
 try {
   app.server.listen(port);
-  server.on(`error`, onError);
-  server.on(`listening`, onListening);
-  app.context.logger.info(`Server initialized`);
+  server.on('error', onError);
+  server.on('listening', onListening);
+  app.context.logger.info('Server initialized');
 } catch (ex) {
-  app.context.logger.error(`Catchall Server Error Handler`, ex);
+  app.context.logger.error('Catchall Server Error Handler', ex);
 }
 
 /**

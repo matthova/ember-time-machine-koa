@@ -10,7 +10,7 @@ const views = require('koa-views');
 const IO = require('koa-socket');
 const path = require('path');
 const Sequelize = require('sequelize');
-const Promise = require(`bluebird`);
+const Promise = require('bluebird');
 
 // Import custom middleware libraries
 const TimeMachine = require('./middleware/TimeMachine');
@@ -23,7 +23,7 @@ class KoaApp {
 
   initialize() {
     // Setup logger
-    const filename = path.join(__dirname, `../../${this.app.context.config.logFileName}`);
+    const filename = path.join(__dirname, '../../${this.app.context.config.logFileName}');
     this.app.context.logger = new (winston.Logger)({
       level: 'debug',
       transports: [
@@ -55,7 +55,7 @@ class KoaApp {
     io.attach(this.app);
 
     // attach database context
-    const sequelize = new Sequelize(`postgres://${process.env.username}:${process.env.password}@localhost:5432/${process.env.dbname}`);
+    const sequelize = new Sequelize('postgres://${process.env.username}:${process.env.password}@localhost:5432/${process.env.dbname}');
 
     // check database connection
     sequelize.authenticate().then((err) => {
@@ -67,7 +67,7 @@ class KoaApp {
     })
     // add custom middleware here
     .then(async () => {
-      const timeMachine = new TimeMachine(this.app, `/`);
+      const timeMachine = new TimeMachine(this.app, '/');
       await timeMachine.initialize();
       this.app.context.logger.info('Ember Time Machine has been initialized successfully.');
     });

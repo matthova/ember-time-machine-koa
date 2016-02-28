@@ -1,4 +1,4 @@
-const Promise = require(`bluebird`);
+const Promise = require('bluebird');
 
 /**
  * Handle all logic at this endpoint for reading all of the tasks
@@ -15,14 +15,14 @@ const renderUi = (self) => {
       });
       const timeMachine = timeMachines[0];
       // Pass the settings to the front end
-      ctx.render(`TimeMachine/index`, {
-        title: `Ember Time Machine`,
+      ctx.render('TimeMachine/index', {
+        title: 'Ember Time Machine',
         ip: timeMachine.ip,
         fps: timeMachine.fps,
         videoLength: timeMachine.videoLength,
       });
     } catch (ex) {
-      ctx.body = { status: `Ember Time Machine request error: ${ex}` };
+      ctx.body = { status: 'Ember Time Machine request error: ${ex}' };
       ctx.status = 500;
     }
   });
@@ -32,7 +32,7 @@ const renderUi = (self) => {
  * Handle all logic at this endpoint for updating a single task
  */
 const updateTimeMachine = (self) => {
-  self.router.put(`/`, async (ctx) => {
+  self.router.put('/', async (ctx) => {
     try {
       const ip = ctx.request.body.ip;
       const fps = ctx.request.body.fps;
@@ -47,7 +47,7 @@ const updateTimeMachine = (self) => {
       });
       ctx.body = { status: "success" };
     } catch (ex) {
-      ctx.body = { status: `Ember Time Machine "Update Settings" request error: ${ex}` };
+      ctx.body = { status: 'Ember Time Machine "Update Settings" request error: ${ex}' };
       ctx.status = 500;
     }
   });

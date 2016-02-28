@@ -1,5 +1,5 @@
 /* global describe, it */
-const should = require(`should`);
+const should = require('should');
 
 module.exports = function toDoListTests(server) {
   describe('To-do list unit test', function () {
