@@ -2,16 +2,17 @@
 body {
   background: #f2f2f2;
   font-family: 'Open Sans', sans-serif;
+  font-size: 25px;
 }
 
 h1 {
   color: #E7614C;
+  font-size: 40px;
 }
 
 input {
   padding: 20px;
   width: 100%;
-  font-size: 20px;
   display: block;
   outline: none;
   color: #313130;
@@ -26,7 +27,7 @@ input {
   padding-top: 10%;
 }
 
-label {
+label, .submit {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
