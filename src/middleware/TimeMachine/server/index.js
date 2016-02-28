@@ -1,7 +1,7 @@
-const router = require('koa-router')();
+const router = require(`koa-router`)();
 
-const timeMachineRoutes = require('./routes');
-const timeMachine = require('./model/timeMachine');
+const timeMachineRoutes = require(`./routes`);
+const timeMachine = require(`./model/timeMachine`);
 
 /**
  * This is a ToDoList class.
@@ -33,14 +33,14 @@ class TimeMachine {
       // If the time machine settings haven't been created ye, create them now
       if (results.length === 0) {
         await this.TimeMachine.create({
-          ip: '0.0.0.0',
-          fps: '24',
-          videoLength: '10',
+          ip: `0.0.0.0`,
+          fps: `24`,
+          videoLength: `10`,
         });
       }
-      this.logger.info('Time Machine instance initialized');
+      this.logger.info(`Time Machine instance initialized`);
     } catch (ex) {
-      this.logger.error('Time Machine initialization error', ex);
+      this.logger.error(`Time Machine initialization error`, ex);
     }
   }
 
@@ -55,10 +55,10 @@ class TimeMachine {
       .use(this.router.routes())
       .use(this.router.allowedMethods());
 
-      this.logger.info('Time Machine router setup');
+      this.logger.info(`Time Machine router setup`);
       return true;
     } catch (ex) {
-      this.logger.error('Time Machine router setup error', ex);
+      this.logger.error(`Time Machine router setup error`, ex);
       return false;
     }
   }

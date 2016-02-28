@@ -2,6 +2,7 @@
 $(document).ready(() => {
   $('#lapse-settings').submit((e) => {
     e.preventDefault();
+    console.log('bruuuh');
     $.ajax({
       type: 'PUT',
       url: '/',
