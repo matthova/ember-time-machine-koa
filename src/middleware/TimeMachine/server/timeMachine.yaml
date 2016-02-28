@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
   version: 1.0.0
-  title: To-Do List REST API
-  description: A REST API for a to-do list
+  title: Time Machine REST API
+  description: A REST API for a Time Machine
 host: localhost:9000
 basePath: /
 schemes:

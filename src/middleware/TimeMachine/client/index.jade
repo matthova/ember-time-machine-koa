@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-xs-12
+        form#lapse-settings
+          header
+            h1 Ember Time Machine
+          label IP Address
+          input(id='time-machine-ip' type='text', name='ip', value='#{ip}')
+          label Frames Per Second
+          input(id='time-machine-fps' type='text', name='fps', value='#{fps}')
+          label Video Length (seconds)
+          input(id='time-machine-video-length' type='text', name='videoLength', value='#{videoLength}')
+          input(type='submit', value='submit', style='display:none')
+  script(src='/js/vendor/jquery.min.js')
+  script(src='/js/vendor/bootstrap.min.js')
+  script(src='/js/TimeMachine/client.js')

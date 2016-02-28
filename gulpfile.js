@@ -11,7 +11,7 @@ const rename = require(`gulp-rename`);
 const src = {
   serverJs: `src/app/**/*.js`,
   clientJs: `src/client/**/*.js`,
-  clientStyles: `src/client/css/style.css`,
+  clientStyles: `src/client/css/**/*.css`,
   middlewareServerJs: `src/middleware/**/server/**/*.js`,
   middlewareModelJs: `src/middleware/**/model/**/*.js`,
   middlewareClientJs: `src/middleware/**/client/**/*.js`,
@@ -27,7 +27,7 @@ const dest = {
   server: `dist/server`,
   middleware: `dist/server/middleware`,
   clientJs: `./dist/client`,
-  clientStyles: `./dist/client`,
+  clientStyles: `./dist/client/css`,
   views: `dist/server/views`,
   docs: `dist/client/docs`,
   yaml: `dist/client/docs/middleware`,

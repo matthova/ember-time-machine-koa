@@ -13,7 +13,7 @@ const Sequelize = require('sequelize');
 const Promise = require(`bluebird`);
 
 // Import custom middleware libraries
-const ToDoList = require('./middleware/toDoList');
+const TimeMachine = require('./middleware/TimeMachine');
 
 class KoaApp {
   constructor(config) {
@@ -67,9 +67,9 @@ class KoaApp {
     })
     // add custom middleware here
     .then(async () => {
-      const tasks = new ToDoList(this.app, `/`);
-      await tasks.initialize();
-      this.app.context.logger.info('Koa Bark has been initialized successfully.');
+      const timeMachine = new TimeMachine(this.app, `/`);
+      await timeMachine.initialize();
+      this.app.context.logger.info('Ember Time Machine has been initialized successfully.');
     });
 
     this.app.on('error', (err, ctx) => {
