@@ -27,7 +27,7 @@ input {
   padding-top: 10%;
 }
 
-label{
+label, .submit{
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -35,7 +35,5 @@ label{
 }
 
 .submit {
-  cursor: default !important;
-  background: #f2f2f2;
-  color: #f2f2f2;
+  background: #cccccc;
 }
