@@ -23,7 +23,7 @@ class KoaApp {
 
   initialize() {
     // Setup logger
-    const filename = path.join(__dirname, '../../' + this.app.context.config.logFileName);
+    const filename = path.join(__dirname, '../../${this.app.context.config.logFileName}');
     this.app.context.logger = new (winston.Logger)({
       level: 'debug',
       transports: [
@@ -55,7 +55,7 @@ class KoaApp {
     io.attach(this.app);
 
     // attach database context
-    const sequelize = new Sequelize('postgres://' + process.env.username + ':' + process.env.password + '@localhost:5432/' + process.env.dbname);
+    const sequelize = new Sequelize('postgres://${process.env.username}:${process.env.password}@localhost:5432/${process.env.dbname}');
 
     // check database connection
     sequelize.authenticate().then((err) => {

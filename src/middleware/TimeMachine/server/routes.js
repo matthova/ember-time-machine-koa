@@ -22,7 +22,7 @@ const renderUi = (self) => {
         videoLength: timeMachine.videoLength,
       });
     } catch (ex) {
-      ctx.body = { status: 'Ember Time Machine request error: ' + ex };
+      ctx.body = { status: 'Ember Time Machine request error: ${ex}' };
       ctx.status = 500;
     }
   });
@@ -47,7 +47,7 @@ const updateTimeMachine = (self) => {
       });
       ctx.body = { status: "success" };
     } catch (ex) {
-      ctx.body = { status: 'Ember Time Machine "Update Settings" request error: ' + ex };
+      ctx.body = { status: 'Ember Time Machine "Update Settings" request error: ${ex}' };
       ctx.status = 500;
     }
   });
