@@ -27,9 +27,15 @@ input {
   padding-top: 10%;
 }
 
-label, .submit {
+label{
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 20px;
+}
+
+.submit {
+  cursor: default !important;
+  background: #f2f2f2;
+  color: #f2f2f2;
 }
