@@ -6,20 +6,12 @@ const Promise = require(`bluebird`);
 const renderUi = (self) => {
   self.router.get(self.routeEndpoint, async (ctx) => {
     try {
-      const timeMachines = await self.TimeMachine.findAll().map((task) => {
-        return {
-          ip: task.dataValues.ip,
-          fps: task.dataValues.fps,
-          videoLength: task.dataValues.videoLength,
-        };
-      });
-      const timeMachine = timeMachines[0];
       // Pass the settings to the front end
       ctx.render(`TimeMachine/index`, {
         title: `Ember Time Machine`,
-        ip: timeMachine.ip,
-        fps: timeMachine.fps,
-        videoLength: timeMachine.videoLength,
+        ip: self.ip,
+        fps: self.fps,
+        videoLength: self.videoLength,
       });
     } catch (ex) {
       ctx.body = { status: `Ember Time Machine request error: ${ex}` };
@@ -37,14 +29,16 @@ const updateTimeMachine = (self) => {
       const ip = ctx.request.body.ip;
       const fps = ctx.request.body.fps;
       const videoLength = ctx.request.body.videoLength;
-      console.log('settings to update', ip, fps, videoLength);
       const timeMachines = await self.TimeMachine.findAll();
       const timeMachine = timeMachines[0];
-      timeMachine.updateAttributes({
+      await timeMachine.updateAttributes({
         ip,
         fps,
         videoLength,
       });
+      self.ip = ip;
+      self.fps = fps;
+      self.videoLength = videoLength;
       ctx.body = { status: "success" };
     } catch (ex) {
       ctx.body = { status: `Ember Time Machine "Update Settings" request error: ${ex}` };
