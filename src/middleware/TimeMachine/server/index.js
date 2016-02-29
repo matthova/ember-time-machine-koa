@@ -1,12 +1,13 @@
 const router = require(`koa-router`)();
 const gpio = require(`gpio`);
 const request = require(`request-promise`);
+const Promise = require(`bluebird`);
 
 const timeMachineRoutes = require(`./routes`);
 const timeMachineModel = require(`./model/timeMachine`);
 
 /**
- * This is a ToDoList class.
+ * This is a Time Machine class.
  */
 class TimeMachine {
   /**
@@ -61,13 +62,15 @@ class TimeMachine {
       this.ip = timeMachine.dataValues.ip;
       this.fps = timeMachine.dataValues.fps;
       this.videoLength = timeMachine.dataValues.videoLength;
-
+      console.log('got setup', this.ip, this.fps, this.videoLength);
       // setup the gpio. once the gpio is ready
       // set the raspberry pi to ping ember at an interval
       this.gpio = gpio.export(this.gpioPin, {
         direction: 'out',
         ready: () => {
-          setInterval(this.pingEmber, 500);
+          setInterval(() => {
+            this.pingEmber();
+          }, 500);
         },
       });
 
@@ -98,38 +101,26 @@ class TimeMachine {
 
   async pingEmber() {
     try {
-      console.log('eyyy');
+      const requestUrl = `http://${this.ip}/command`;
       const requestParams = {
         method: `POST`,
-        uri: `http://${this.ip}/command`,
-        body: {
-          command: `getStatus`,
-        },
+        uri: requestUrl,
+        form: {"command":"getstatus"},
         json: true,
       };
       const res = await request(requestParams);
       this.parseStatus(res);
     } catch(ex) {
-      console.log('request error');
+      console.log('request error', ex);
     }
   }
 
-/*
-    this.state = `Unavailable`;
-    this.photoTaken = false;
-    this.totalLayers = undefined;
-    this.layersPerPhoto = undefined;
-    this.currentPhoto = undefined;
-    this.totalPhotos = undefined;
-*/
-
   async parseStatus(status) {
     try {
-      if (this.totalLayers === 0) {
-        this.updateLayersPerPhoto(status);
-      }
+      this.updateLayersPerPhoto(status);
 
       this.state = status.response.state.toLowerCase();
+      this.currentLayer = status.response.layer;
       // get the current layer
 
       switch (this.state) {
@@ -152,7 +143,6 @@ class TimeMachine {
           this.totalLayers = 0;
           break;
         default:
-          console.log('wuuuuhh', this.state);
           break;
       }
     } catch(ex) {
@@ -162,6 +152,7 @@ class TimeMachine {
 
   async takePhoto() {
     this.gpio.set(1);
+    console.log('Taking a photo!');
     await Promise.delay(100);
     this.gpio.set(0);
   }
