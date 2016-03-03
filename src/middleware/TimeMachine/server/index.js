@@ -62,7 +62,6 @@ class TimeMachine {
       this.ip = timeMachine.dataValues.ip;
       this.fps = timeMachine.dataValues.fps;
       this.videoLength = timeMachine.dataValues.videoLength;
-      console.log('got setup', this.ip, this.fps, this.videoLength);
       // setup the gpio. once the gpio is ready
       // set the raspberry pi to ping ember at an interval
       this.gpio = gpio.export(this.gpioPin, {
@@ -127,6 +126,7 @@ class TimeMachine {
         case `exposing`:
           if (!this.photoTaken) {
             this.photoTaken = true;
+            // Comment these lines out if you want to take a photo on every layer
             if (this.currentLayer % this.layersPerPhoto === 0) {
               await this.takePhoto();
             }
